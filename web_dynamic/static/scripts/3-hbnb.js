@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    const HOST = 'localhost';
+    const HOST = '0.0.0.0';
     const amenityObj = {};
 
     $('.amenities .popover input').change(function () {

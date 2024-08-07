@@ -1,19 +1,24 @@
 #!/usr/bin/node
 
-$(document).ready(function() {
-    let selectedAmenities = {};
-
-    $('input[type="checkbox"]').change(function() {
-        if (this.checked) {
-            selectedAmenities[$(this).data('id')] = $(this).data('name');
-        } else {
-            delete selectedAmenities[$(this).data('id')];
-        }
-        let amenitiesList = Object.values(selectedAmenities).join(', ');
-        if (amenitiesList.length > 0) {
-            $('div.amenities h4').text(amenitiesList);
-        } else {
-            $('div.amenities h4').html('&nbsp;');
-        }
-    });
+$(document).ready(function () {
+  const amenities = {};
+  $('input[type="checkbox"]').click(function () {
+    const amenityId = $(this).attr('data-id');
+    const amenityName = $(this).attr('data-name');
+    if ($(this).prop('checked') === true) {
+      amenities[amenityId] = amenityName;
+    } else if ($(this).prop('checked') === false) {
+      delete amenities[amenityId];
+    }
+    const amenityList = Object.values(amenities).join(', ');
+    if (amenityList.length > 30) {
+      $('.amenities h4').text(amenityList.substring(0, 29) + '...');
+    } else {
+      $('.amenities h4').text(amenityList);
+    }
+    if ($.isEmptyObject(amenities)) {
+      $('.amenities h4').html('&nbsp;');
+    }
+  });
 });
+
